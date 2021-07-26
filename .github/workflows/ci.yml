@@ -1,19 +1,9 @@
 name: CI
 on: [push, pull_request]
-#  schedule:
-#    - cron: '0 0-23/4 * * *'
 jobs:
   windows:
     name: Windows
     runs-on: windows-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        include:
-          - platform: arm64
-            arch: arm64
-            triplet: arm64-windows
-            vcpkgPackages: 'benchmark'
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -22,5 +12,5 @@ jobs:
         id: runvcpkg
         with:
           vcpkgGitCommitId: d781bd9ca77ac3dc2f13d88169021d48459c665f
-          vcpkgTriplet: '${{ matrix.triplet }}'
-          vcpkgArguments: '${{ matrix.vcpkgPackages }}'
+          vcpkgTriplet: 'arm64-windows'
+          vcpkgArguments: 'benchmark'
